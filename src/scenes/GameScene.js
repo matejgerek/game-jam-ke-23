@@ -157,7 +157,7 @@ export default class GameScene extends Phaser.Scene{
         this.scoreText.setText('Score: ' +  Math.trunc(this.score));
         // game over
         if(this.player.y > this.game.config.height){
-            this.scene.start("PlayGame");
+            this.scene.start("GameOverScene");
         }
         this.player.x = gameOptions.playerStartPosition;
 
