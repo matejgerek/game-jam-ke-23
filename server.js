@@ -17,7 +17,7 @@ app.get('/scores', function (req, res) {
 app.get('/add-score/:score/:name', function (req, res) {
   const { score, name } = req.params;
   const leaderboard = new Leaderboard();
-  leaderboard.addScore(score, name, new Date());
+  leaderboard.addScore(name, score, new Date());
   res.status(200).send();
 });
 
