@@ -1,5 +1,4 @@
 import GameScene from './scenes/GameScene.js'
-import {SCENES} from "./constants";
 
 // object containing configuration options
 let gameConfig = {
@@ -20,10 +19,10 @@ window.addEventListener("resize", resize, false);
 
 let gameScene = new GameScene(game);
 // load scenes
-game.scene.add(SCENES.GAME, gameScene);
+game.scene.add('GameScene', gameScene);
 
 // start title
-game.scene.start(SCENES.GAME);
+game.scene.start('GameScene');
 
 function resize(){
     let canvas = document.querySelector("canvas");

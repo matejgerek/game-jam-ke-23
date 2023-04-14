@@ -1,6 +1,4 @@
 // global game options
-import {SCENES} from "../constants";
-
 let gameOptions = {
     platformStartSpeed: 350,
     spawnRange: [100, 350],
@@ -13,7 +11,7 @@ let gameOptions = {
 
 export default class GameScene extends Phaser.Scene{
     constructor(game){
-        super(SCENES.GAME);
+        super("GameScene");
         this.game = game;
     }
     preload(){
