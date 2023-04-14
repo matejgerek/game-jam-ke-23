@@ -71,9 +71,6 @@ export default class GameScene extends Phaser.Scene{
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.player, this.platformGroup);
 
-        // checking for input
-        this.input.on("pointerdown", this.jump, this);
-
         // Define player animation frames
         this.anims.create({
             key: 'run',
@@ -107,13 +104,13 @@ export default class GameScene extends Phaser.Scene{
                 { key: 'player9jump' },
                 { key: 'player10jump' }
             ],
-            frameRate: 10,
-            repeat: 0
+            frameRate: 10
         });
 
         // Start player animation
         this.player.anims.play('run');
-
+        // checking for input
+        this.input.on("pointerdown", this.jump, this);
     }
 
     // the core of the script: platform are added from the pool or created on the fly
@@ -144,19 +141,13 @@ export default class GameScene extends Phaser.Scene{
             }
             this.player.setVelocityY(gameOptions.jumpForce * -1);
             this.playerJumps++;
-            this.jumpAndRun()
+            this.currentAnimation = 'jump';
+            this.player.anims.play(this.currentAnimation).once('animationcomplete', () => {
+                this.player.anims.play("run");
+            });
         }
     }
 
-    jumpAndRun() {
-        // play the 'jump' animation
-        this.player.anims.play('jump');
-
-        // add an animation event listener to switch to the 'run' animation when the 'jump' animation finishes
-        this.player.on('animationcomplete-jump', function() {
-            this.player.anims.play('run');
-        }, this);
-    }
     update(){
         // game over
         if(this.player.y > this.game.config.height){
