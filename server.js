@@ -14,6 +14,13 @@ app.get('/scores', function (req, res) {
   res.send(leaderboard.getTopScores());
 })
 
+app.get('/add-score/:score/:name', function (req, res) {
+  const { score, name } = req.params;
+  const leaderboard = new Leaderboard();
+  leaderboard.addScore(score, name, new Date());
+  res.status(200).send();
+});
+
 app.listen(3000, () => {
   console.log('Server listening on http://localhost:3000');
 });

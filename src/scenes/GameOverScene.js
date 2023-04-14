@@ -10,7 +10,7 @@ export default class GameOverScene extends Phaser.Scene {
         this.load.image('game_over', 'src/assets/game_over.png');
     }
 
-    create(data) {
+    async create(data) {
         const score = Math.floor(data.score);
         this.background = this.add.image(0, 0, 'background');
         this.background.setOrigin(0, 0);
@@ -18,7 +18,7 @@ export default class GameOverScene extends Phaser.Scene {
         this.background.displayWidth = this.sys.game.config.width;
         this.background.displayHeight = this.sys.game.config.height;
         this.background.depth = -1;
-
+        await fetch(`/add-score/${score}/name`)
         const centerX = this.cameras.main.width / 2;
         this.add.image(centerX, 200, 'game_over').setOrigin(0.5, 0);
 
