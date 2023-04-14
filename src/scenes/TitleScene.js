@@ -26,6 +26,11 @@ export default class TitleScene extends Phaser.Scene {
             'Leaderboard', { fontSize: '32px', fill: TEXT_COLOR });
         leaderboardText.setInteractive({ useHandCursor: true });
         leaderboardText.on('pointerdown', () => this.leaderboardButton());
+        const username = localStorage.getItem('phaser_username');
+        if (!username) {
+            const name = prompt('Please enter your name:');
+            localStorage.setItem('phaser_username', name);
+        }
     }
 
     startButton() {
