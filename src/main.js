@@ -1,4 +1,5 @@
 import GameScene from './scenes/GameScene.js'
+import LeaderboardScene from "./scenes/LeaderboardScene.js";
 
 // object containing configuration options
 let gameConfig = {
@@ -18,7 +19,9 @@ resize();
 window.addEventListener("resize", resize, false);
 
 let gameScene = new GameScene(game);
+const leaderboardScene = new LeaderboardScene();
 // load scenes
+game.scene.add('LeaderboardScene', leaderboardScene)
 game.scene.add('GameScene', gameScene);
 
 // start title

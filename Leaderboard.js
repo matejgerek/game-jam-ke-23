@@ -1,16 +1,16 @@
 const fs = require('fs');
 
-const FILE_NAME = 'scores.json';
+const PATH = __dirname + '/scores.json';
 
 class Leaderboard {
-  constructor() {
-    this.maxScores = 5;
+  constructor(maxScores = 5) {
+    this.maxScores = maxScores;
     this.loadScores();
   }
 
   addScore(name, score, date) {
     this.scores.push({ name, score, date });
-    this.scores.sort((a, b) => b.score - a.score); // sort descending
+    this.scores.sort((a, b) => b.score - a.score);
     if (this.scores.length > this.maxScores) {
       this.scores.splice(this.maxScores);
     }
@@ -28,7 +28,7 @@ class Leaderboard {
 
   loadScores() {
       try {
-        const data = fs.readFileSync(FILE_NAME);
+        const data = fs.readFileSync(PATH);
         this.scores = JSON.parse(data);
       } catch (err) {
         if (err.code === 'ENOENT') {
@@ -43,7 +43,7 @@ class Leaderboard {
 
 
   saveScores() {
-    fs.writeFileSync(FILE_NAME, JSON.stringify(this.scores));
+    fs.writeFileSync(PATH, JSON.stringify(this.scores));
   }
 }
 
