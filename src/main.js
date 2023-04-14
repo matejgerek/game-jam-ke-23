@@ -1,5 +1,6 @@
 import GameScene from './scenes/GameScene.js'
 import LeaderboardScene from "./scenes/LeaderboardScene.js";
+import TitleScene from "./scenes/TitleScene.js";
 
 // object containing configuration options
 let gameConfig = {
@@ -20,12 +21,14 @@ window.addEventListener("resize", resize, false);
 
 let gameScene = new GameScene(game);
 const leaderboardScene = new LeaderboardScene();
+const titleScene = new TitleScene();
 // load scenes
+game.scene.add('TitleScene', titleScene)
 game.scene.add('LeaderboardScene', leaderboardScene)
 game.scene.add('GameScene', gameScene);
 
 // start title
-game.scene.start('GameScene');
+game.scene.start('TitleScene');
 
 function resize(){
     let canvas = document.querySelector("canvas");
