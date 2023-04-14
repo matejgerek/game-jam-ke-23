@@ -17,7 +17,26 @@ export default class GameScene extends Phaser.Scene{
     preload(){
         this.load.image("background", "src/assets/background.jpg");
         this.load.image("platform", "src/assets/platform.png");
-        this.load.image("player", "src/assets/player1move.png");
+        this.load.image("player1run", "src/assets/run/Run__000.png");
+        this.load.image("player2run", "src/assets/run/Run__001.png");
+        this.load.image("player3run", "src/assets/run/Run__002.png");
+        this.load.image("player4run", "src/assets/run/Run__003.png");
+        this.load.image("player5run", "src/assets/run/Run__004.png");
+        this.load.image("player6run", "src/assets/run/Run__005.png");
+        this.load.image("player7run", "src/assets/run/Run__006.png");
+        this.load.image("player8run", "src/assets/run/Run__007.png");
+        this.load.image("player9run", "src/assets/run/Run__008.png");
+        this.load.image("player10run", "src/assets/run/Run__009.png");
+        this.load.image("player1jump", "src/assets/jump/Jump__000.png");
+        this.load.image("player2jump", "src/assets/jump/Jump__001.png");
+        this.load.image("player3jump", "src/assets/jump/Jump__002.png");
+        this.load.image("player4jump", "src/assets/jump/Jump__003.png");
+        this.load.image("player5jump", "src/assets/jump/Jump__004.png");
+        this.load.image("player6jump", "src/assets/jump/Jump__005.png");
+        this.load.image("player7jump", "src/assets/jump/Jump__006.png");
+        this.load.image("player8jump", "src/assets/jump/Jump__007.png");
+        this.load.image("player9jump", "src/assets/jump/Jump__008.png");
+        this.load.image("player10jump", "src/assets/jump/Jump__009.png");
     }
     create(){
         this.background = this.physics.add.image(this.game.config.width / 2, this.game.config.height * 0.8, "background");
@@ -46,7 +65,7 @@ export default class GameScene extends Phaser.Scene{
         this.addPlatform(this.game.config.width, this.game.config.width / 2);
 
         // adding the player;
-        this.player = this.physics.add.sprite(gameOptions.playerStartPosition, this.game.config.height / 2, "player");
+        this.player = this.physics.add.sprite(gameOptions.playerStartPosition, this.game.config.height / 2, "player1run");
         this.player.setGravityY(gameOptions.playerGravity);
 
         // setting collisions between the player and the platform group
@@ -54,6 +73,47 @@ export default class GameScene extends Phaser.Scene{
 
         // checking for input
         this.input.on("pointerdown", this.jump, this);
+
+        // Define player animation frames
+        this.anims.create({
+            key: 'run',
+            frames: [
+                { key: 'player1run' },
+                { key: 'player2run' },
+                { key: 'player3run' },
+                { key: 'player4run' },
+                { key: 'player5run' },
+                { key: 'player6run' },
+                { key: 'player7run' },
+                { key: 'player8run' },
+                { key: 'player9run' },
+                { key: 'player10run' }
+            ],
+            frameRate: 10,
+            repeat: -1
+        });
+        // Define player animation frames
+        this.anims.create({
+            key: 'jump',
+            frames: [
+                { key: 'player1jump' },
+                { key: 'player2jump' },
+                { key: 'player3jump' },
+                { key: 'player4jump' },
+                { key: 'player5jump' },
+                { key: 'player6jump' },
+                { key: 'player7jump' },
+                { key: 'player8jump' },
+                { key: 'player9jump' },
+                { key: 'player10jump' }
+            ],
+            frameRate: 10,
+            repeat: 0
+        });
+
+        // Start player animation
+        this.player.anims.play('run');
+
     }
 
     // the core of the script: platform are added from the pool or created on the fly
@@ -83,11 +143,21 @@ export default class GameScene extends Phaser.Scene{
                 this.playerJumps = 0;
             }
             this.player.setVelocityY(gameOptions.jumpForce * -1);
-            this.playerJumps ++;
+            this.playerJumps++;
+            this.jumpAndRun()
         }
     }
-    update(){
 
+    jumpAndRun() {
+        // play the 'jump' animation
+        this.player.anims.play('jump');
+
+        // add an animation event listener to switch to the 'run' animation when the 'jump' animation finishes
+        this.player.on('animationcomplete-jump', function() {
+            this.player.anims.play('run');
+        }, this);
+    }
+    update(){
         // game over
         if(this.player.y > this.game.config.height){
             this.scene.start("PlayGame");
@@ -110,5 +180,8 @@ export default class GameScene extends Phaser.Scene{
             var nextPlatformWidth = Phaser.Math.Between(gameOptions.platformSizeRange[0], gameOptions.platformSizeRange[1]);
             this.addPlatform(nextPlatformWidth, this.game.config.width + nextPlatformWidth / 2);
         }
+
+        this.player.x += 1;
+
     }
 };
