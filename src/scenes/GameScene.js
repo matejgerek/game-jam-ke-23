@@ -111,6 +111,10 @@ export default class GameScene extends Phaser.Scene{
         this.player.anims.play('run');
         // checking for input
         this.input.on("pointerdown", this.jump, this);
+
+        this.score = 0;
+        this.scoreText = this.add.text(10, 10, 'Score: ' + this.score, { fontSize: '32px', fill: '#fff' });
+
     }
 
     // the core of the script: platform are added from the pool or created on the fly
@@ -149,6 +153,8 @@ export default class GameScene extends Phaser.Scene{
     }
 
     update(){
+        this.score += 0.01;
+        this.scoreText.setText('Score: ' +  Math.trunc(this.score));
         // game over
         if(this.player.y > this.game.config.height){
             this.scene.start("PlayGame");
