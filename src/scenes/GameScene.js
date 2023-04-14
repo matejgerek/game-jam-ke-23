@@ -39,7 +39,11 @@ export default class GameScene extends Phaser.Scene{
         this.load.image("player10jump", "src/assets/jump/Jump__009.png");
     }
     create(){
-        this.background = this.physics.add.image(this.game.config.width / 2, this.game.config.height * 0.8, "background");
+        this.background = this.add.image(0, 0, "background");
+        this.background.setOrigin(0, 0);
+        this.background.displayWidth = this.sys.game.config.width;
+        this.background.displayHeight = this.sys.game.config.height;
+        this.background.depth = -1;
 
         // group with all active platforms.
         this.platformGroup = this.add.group({
