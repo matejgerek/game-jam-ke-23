@@ -7,6 +7,7 @@ export default class GameOverScene extends Phaser.Scene {
 
     preload() {
         this.load.image('background', 'src/assets/background.jpg');
+        this.load.image('game_over', 'src/assets/game_over.png');
     }
 
    create() {
@@ -18,15 +19,15 @@ export default class GameOverScene extends Phaser.Scene {
       this.background.depth = -1;
 
       const centerX = this.cameras.main.width / 2;
-      const gameOverText = this.add.text(centerX, 50, 'Game Over', { fontSize: '32px', fill: TEXT_COLOR });
-      gameOverText.setOrigin(0.5, 0);
+      this.add.image(centerX, 200, 'game_over').setOrigin(0.5, 0);
+
+        const scoreText = this.add.text(centerX, 300, `Score: ${this.game.score}`, { fontSize: '32px', fill: TEXT_COLOR });
+        scoreText.setOrigin(0.5, 0);
+        scoreText.y = this.cameras.main.height / 2;
 
       const returnText = this.add.text(centerX, 100, 'Press Space to Return to Main Menu', { fontSize: '24px', fill: TEXT_COLOR });
       returnText.setOrigin(0.5, 0);
-
-      // Center the text vertically by setting the y position to half the height of the game screen
-      gameOverText.y = this.cameras.main.height / 2 - gameOverText.displayHeight;
-      returnText.y = this.cameras.main.height / 2;
+      returnText.y = this.cameras.main.height / 2 + 200;
     }
 
 
