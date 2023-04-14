@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="global.css">
 </head>
 <body>
-
 <script>
     let game;
 
@@ -47,10 +46,12 @@ class playGame extends Phaser.Scene{
         super("PlayGame");
     }
     preload(){
-        this.load.image("platform", "platform.png");
-        this.load.image("player", "player.png");
+        this.load.image("background", "src/assets/background.jpg");
+        this.load.image("platform", "src/assets/platform.png");
+        this.load.image("player", "src/assets/player1move.png");
     }
     create(){
+        this.background = this.physics.add.image(game.config.width / 2, game.config.height * 0.8, "background");
 
         // group with all active platforms.
         this.platformGroup = this.add.group({
@@ -69,7 +70,6 @@ class playGame extends Phaser.Scene{
                 platform.scene.platformGroup.add(platform)
             }
         });
-
         // number of consecutive jumps made by the player
         this.playerJumps = 0;
 
@@ -98,7 +98,7 @@ class playGame extends Phaser.Scene{
             this.platformPool.remove(platform);
         }
         else{
-            platform = this.physics.add.sprite(posX, game.config.height * 0.8, "platform");
+            platform = this.physics.add.sprite(posX, game.config.height * 1, "platform");
             platform.setImmovable(true);
             platform.setVelocityX(gameOptions.platformStartSpeed * -1);
             this.platformGroup.add(platform);
