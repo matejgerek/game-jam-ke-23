@@ -114,7 +114,7 @@ export default class GameScene extends Phaser.Scene{
         // Start player animation
         this.player.anims.play('run');
         // checking for input
-        this.input.on("pointerdown", this.jump, this);
+        this.input.keyboard.on("keydown", this.jump, this);
 
         this.score = 0;
         this.scoreText = this.add.text(10, 10, 'Score: ' + this.score, { fontSize: '32px', fill: '#fff' });
