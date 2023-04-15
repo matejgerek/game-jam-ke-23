@@ -43,7 +43,8 @@ export default class GameCollectStarsScene extends Phaser.Scene {
         this.background.depth = -1;
 
         // cover ground with grass
-        this.groundOverlay = this.add.tileSprite(this.game.config.width / 2, this.game.config.height * 1, this.sys.game.config.width, 100,
+        this.groundOverlay = this.add.tileSprite(this.game.config.width / 2, this.game.config.height * 1,
+            this.sys.game.config.width, 100,
             'platformGrass');
         this.groundOverlay.depth = 2;
 

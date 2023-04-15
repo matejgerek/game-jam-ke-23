@@ -18,12 +18,19 @@ export default class GameJumpUpScene extends Phaser.Scene {
 
     preload() {
         this.load.image("background", "src/assets/hill.png");
-        this.load.image("platform", "src/assets/platform.png");
-        this.load.image("platformLowest", "src/assets/platformLowest.png");
+        this.load.image("platformDirt", "src/assets/platformDirt.png");
+        this.load.image("platformGrass", "src/assets/platformGrass.png");
+        this.load.image("platformLowest", "src/assets/platformLow.png");
         this.load.image("player", "src/assets/player1move.png");
     }
 
     create() {
+        // cover ground with grass
+        this.groundOverlay = this.add.tileSprite(this.game.config.width / 2, this.game.config.height * 1,
+            this.sys.game.config.width, 100,
+            'platformGrass');
+        this.groundOverlay.depth = 2;
+
         gameOptions.platform1height = 150
         gameOptions.platform2height = 300
         // set background
@@ -91,7 +98,7 @@ export default class GameJumpUpScene extends Phaser.Scene {
 
         // adding a start platform to the game
         let platform;
-        platform = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height * 1, "platform");
+        platform = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height * 1, "platformDirt");
         platform.setImmovable(true);
         platform.displayWidth = this.game.config.width;
 
@@ -187,6 +194,9 @@ export default class GameJumpUpScene extends Phaser.Scene {
     }
 
     update(time, delta) {
+        // ground speed, find out how to calculate speed
+        this.groundOverlay.tilePositionX += 6;
+
         if (this.player.y > this.game.config.height-100 && this.score > 1) {
             this.scene.start("GameOverScene", {score: this.score, leaderboardPath: 'JUMP_UP'});
         }
