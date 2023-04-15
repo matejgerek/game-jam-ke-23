@@ -1,6 +1,6 @@
-const Leaderboard = require('./Leaderboard');
+const Leaderboard = require("./Leaderboard");
 
-const leaderboard = new Leaderboard();
+const leaderboard = new Leaderboard('DODGE_HOLES');
 
 leaderboard.addScore('Player 1', 100, new Date());
 leaderboard.addScore('Player 2', 200, new Date());

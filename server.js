@@ -9,14 +9,15 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/scores', function (req, res) {
-  const leaderboard = new Leaderboard();
+app.get('/scores/:leaderboardPath', function (req, res) {
+  const { leaderboardPath } = req.params;
+  const leaderboard = new Leaderboard(leaderboardPath);
   res.send(leaderboard.getTopScores());
 })
 
-app.get('/add-score/:score/:name', function (req, res) {
-  const { score, name } = req.params;
-  const leaderboard = new Leaderboard();
+app.get('/add-score/:leaderboardPath/:score/:name', function (req, res) {
+  const { leaderboardPath, score, name } = req.params;
+  const leaderboard = new Leaderboard(leaderboardPath);
   leaderboard.addScore(name, score, new Date());
   res.status(200).send();
 });
