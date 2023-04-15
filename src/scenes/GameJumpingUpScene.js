@@ -18,7 +18,8 @@ export default class GameJumpingUpScene extends Phaser.Scene {
 
     preload() {
         this.load.image("background1", "src/assets/background_new.png");
-        this.load.image("platform", "src/assets/platform_new.png");
+        this.load.image("platformDirt", "src/assets/platformDirt.png");
+        this.load.image("platformGrass", "src/assets/platformGrass.png");
         this.load.image("platformLowest", "src/assets/platformLowest.png");
         this.load.image("player1run", "src/assets/run/Run__000.png");
         this.load.image("player2run", "src/assets/run/Run__001.png");
@@ -49,6 +50,10 @@ export default class GameJumpingUpScene extends Phaser.Scene {
             'background1').setOrigin(0,0);
         this.background.setScale(1.5);
         this.background.depth = -1;
+
+        this.groundOverlay = this.add.tileSprite(this.game.config.width / 2, this.game.config.height * 1, this.sys.game.config.width, 100,
+            'platformGrass');
+        this.groundOverlay.depth = 2;
 
         // add exit button with styling
         const exitButton = this.add.text(this.game.config.width - 110, 20,
@@ -125,7 +130,7 @@ export default class GameJumpingUpScene extends Phaser.Scene {
 
         // adding a start platform to the game
         let platform;
-        platform = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height * 1, "platform");
+        platform = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height * 1, "platformDirt");
         platform.setImmovable(true);
         platform.displayWidth = this.game.config.width;
 
@@ -270,6 +275,8 @@ export default class GameJumpingUpScene extends Phaser.Scene {
     update(time, delta) {
         // move background
         this.background.tilePositionX += BACKGROUND_SPEED;
+        // ground speed, find out how to calculate speed
+        this.groundOverlay.tilePositionX += 4.2;
         // add score text
         this.scoreText.setText('Score: ' + this.score);
         // game over
