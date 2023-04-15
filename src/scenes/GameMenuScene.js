@@ -16,15 +16,43 @@ export default class GameMenuScene extends Phaser.Scene {
         this.background.displayHeight = this.sys.game.config.height;
         this.background.depth = -1;
 
-        const startText = this.add.text(this.game.config.width/2 - 115, this.game.config.height/2, 'Dodge Holes',
-            { fontSize: '32px', fill: TEXT_COLOR });
-        startText.setInteractive({ useHandCursor: true });
-        startText.on('pointerdown', () => this.game1Button());
 
-        const jumpingUpGame = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2 + 100,
-            'Jumping Up', { fontSize: '32px', fill: TEXT_COLOR });
-        jumpingUpGame.setInteractive({ useHandCursor: true });
-        jumpingUpGame.on('pointerdown', () => this.game2JumpingUp());
+        // add dodge holes button with styling
+        const dodgeHolesButton = this.add.text(this.game.config.width/2 - 115, this.game.config.height/2,
+            'Dodge Holes', {
+                fill: '#fff',
+                backgroundColor: '#7D58BE',
+                padding: {
+                    x: 10,
+                    y: 5
+                },
+                borderRadius: 10,
+                fontSize: '32px'
+            });
+        // add functionality to the start game button
+        dodgeHolesButton.setInteractive({ useHandCursor: true })
+            .on('pointerover', () => dodgeHolesButton.setStyle({ backgroundColor: '#BB5BFF' }))
+            .on('pointerout', () => dodgeHolesButton.setStyle({ backgroundColor: '#7D58BE' }))
+            .on('pointerdown', () => {this.game1Button()});
+
+
+        // add jumping up game button with styling
+        const jumpingUpButton = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2 + 100,
+            'Jumping Up', {
+                fill: '#fff',
+                backgroundColor: '#7D58BE',
+                padding: {
+                    x: 10,
+                    y: 5
+                },
+                borderRadius: 10,
+                fontSize: '32px'
+            });
+        // add functionality to the leaderboard button
+        jumpingUpButton.setInteractive({ useHandCursor: true })
+            .on('pointerover', () => jumpingUpButton.setStyle({ backgroundColor: '#BB5BFF' }))
+            .on('pointerout', () => jumpingUpButton.setStyle({ backgroundColor: '#7D58BE' }))
+            .on('pointerdown', () => {this.game2JumpingUp()});
     }
 
     game1Button() {

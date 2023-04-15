@@ -16,15 +16,43 @@ export default class TitleScene extends Phaser.Scene {
         this.background.displayHeight = this.sys.game.config.height;
         this.background.depth = -1;
 
-        const startText = this.add.text(this.game.config.width/2 - 100, this.game.config.height/2, 'Start Game',
-            { fontSize: '32px', fill: TEXT_COLOR });
-        startText.setInteractive({ useHandCursor: true });
-        startText.on('pointerdown', () => this.startButton());
+        // add start game button with styling
+        const startGameButton = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2,
+                'Start Game', {
+            fill: '#fff',
+            backgroundColor: '#7D58BE',
+            padding: {
+                x: 10,
+                y: 5
+            },
+            borderRadius: 10,
+            fontSize: '32px'
+        });
+        // add functionality to the start game button
+        startGameButton.setInteractive({ useHandCursor: true })
+            .on('pointerover', () => startGameButton.setStyle({ backgroundColor: '#BB5BFF' }))
+            .on('pointerout', () => startGameButton.setStyle({ backgroundColor: '#7D58BE' }))
+            .on('pointerdown', () => {this.startButton()});
 
-        const leaderboardText = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2 + 100,
-            'Leaderboard', { fontSize: '32px', fill: TEXT_COLOR });
-        leaderboardText.setInteractive({ useHandCursor: true });
-        leaderboardText.on('pointerdown', () => this.leaderboardButton());
+        // add leaderboard button with styling
+        const leaderboardButton = this.add.text(this.game.config.width/2 - 120, this.game.config.height/2 + 100,
+                'Leaderboard', {
+            fill: '#fff',
+            backgroundColor: '#7D58BE',
+            padding: {
+                x: 10,
+                y: 5
+            },
+            borderRadius: 10,
+            fontSize: '32px'
+        });
+        // add functionality to the leaderboard button
+        leaderboardButton.setInteractive({ useHandCursor: true })
+            .on('pointerover', () => leaderboardButton.setStyle({ backgroundColor: '#BB5BFF' }))
+            .on('pointerout', () => leaderboardButton.setStyle({ backgroundColor: '#7D58BE' }))
+            .on('pointerdown', () => {this.leaderboardButton()});
+
+
         const username = localStorage.getItem('phaser_username');
         if (!username) {
             const name = prompt('Please enter your name:');
