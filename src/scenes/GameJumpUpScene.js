@@ -21,7 +21,18 @@ export default class GameJumpUpScene extends Phaser.Scene {
         this.load.image("platformDirt", "src/assets/platformDirt.png");
         this.load.image("platformGrass", "src/assets/platformGrass.png");
         this.load.image("platformLowest", "src/assets/platformLow.png");
-        this.load.image("player", "src/assets/player1move.png");
+        this.load.image("player", "src/assets/run/run1n.png");
+        this.load.image("player1run", "src/assets/run/run1n.png");
+        this.load.image("player2run", "src/assets/run/run2n.png");
+        this.load.image("player3run", "src/assets/run/run3n.png");
+        this.load.image("player4run", "src/assets/run/run4n.png");
+        this.load.image("player5run", "src/assets/run/run5n.png");
+        this.load.image("player6run", "src/assets/run/run6n.png");
+        this.load.image("player7run", "src/assets/run/run7n.png");
+        this.load.image("player8run", "src/assets/run/run8n.png");
+        this.load.image("player1jump", "src/assets/jump/jump1.png");
+        this.load.image("player2jump", "src/assets/jump/jump2.png");
+        this.load.image("player3jump", "src/assets/jump/jump3.png");
     }
 
     create() {
@@ -136,6 +147,36 @@ export default class GameJumpUpScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+
+        // Define player animation frames
+        this.anims.create({
+            key: 'run',
+            frames: [
+                { key: 'player1run' },
+                { key: 'player2run' },
+                { key: 'player3run' },
+                { key: 'player4run' },
+                { key: 'player5run' },
+                { key: 'player6run' },
+                { key: 'player7run' },
+                { key: 'player8run' },
+            ],
+            frameRate: 8,
+            repeat: -1
+        });
+        // Define player animation frames
+        this.anims.create({
+            key: 'jump',
+            frames: [
+                { key: 'player1jump' },
+                { key: 'player2jump' },
+                { key: 'player3jump' },
+            ],
+            frameRate: 4
+        });
+
+        this.player.anims.play('run');
+        this.player.setScale(1.5, 1.5);
     }
 
     addNewPlatform(){
@@ -190,6 +231,10 @@ export default class GameJumpUpScene extends Phaser.Scene {
             }
             this.player.setVelocityY(gameOptions.jumpForce * -1);
             this.playerJumps++;
+            this.currentAnimation = 'jump';
+            this.player.anims.play(this.currentAnimation).once('animationcomplete', () => {
+                this.player.anims.play("run");
+            });
         }
     }
 
