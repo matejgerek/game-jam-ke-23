@@ -39,7 +39,9 @@ export default class GameScene extends Phaser.Scene{
         this.load.image("player10jump", "src/assets/jump/Jump__009.png");
     }
     create(){
-        this.background = this.add.image(0, 0, "background");
+        // setup background
+        this.background = this.add.tileSprite(0, 0, 0, 0, 'background');
+        this.background.tilePositionX = -100;
         this.background.setOrigin(0, 0);
         this.background.displayWidth = this.sys.game.config.width;
         this.background.displayHeight = this.sys.game.config.height;
@@ -157,6 +159,9 @@ export default class GameScene extends Phaser.Scene{
     }
 
     update(){
+        // move background
+        this.background.tilePositionX += 4;
+        // add score
         this.score += 0.01;
         this.scoreText.setText('Score: ' +  Math.trunc(this.score));
         // game over
