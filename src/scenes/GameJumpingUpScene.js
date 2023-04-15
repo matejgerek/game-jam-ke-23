@@ -18,6 +18,7 @@ export default class GameJumpingUpScene extends Phaser.Scene {
     preload() {
         this.load.image("background", "src/assets/hill.png");
         this.load.image("platform", "src/assets/platform.png");
+        this.load.image("platformLowest", "src/assets/platformLowest.png");
         this.load.image("player1run", "src/assets/run/Run__000.png");
         this.load.image("player2run", "src/assets/run/Run__001.png");
         this.load.image("player3run", "src/assets/run/Run__002.png");
@@ -121,8 +122,14 @@ export default class GameJumpingUpScene extends Phaser.Scene {
         this.score = 0;
         this.scoreText = this.add.text(10, 10, 'Score: ' + this.score, {fontSize: '32px', fill: '#fff'});
         //time
-        this.timer = 120;
+        this.timer = 60;
         this.timerText = this.add.text(10, 42, 'Time: ' + this.timer + 's', {fontSize: '32px', fill: '#fff'});
+        this.time.addEvent({
+            delay: 1000, // in milliseconds
+            callback: this.updateTimer,
+            callbackScope: this,
+            loop: true
+        });
 
         // Define player animation frames
         this.anims.create({
@@ -163,7 +170,6 @@ export default class GameJumpingUpScene extends Phaser.Scene {
         // Start player animation
         this.player.anims.play('run');
 
-
         this.physics.add.collider(this.player, this.starGroup.getChildren(), this.onCollision, null, this);
     }
 
@@ -185,7 +191,7 @@ export default class GameJumpingUpScene extends Phaser.Scene {
             this.platformPool.remove(platform);
         }
         else {
-            platform = this.physics.add.sprite(posX, posY, "platform");
+            platform = this.physics.add.sprite(posX, posY, "platformLowest");
             platform.setImmovable(true);
             platform.setVelocityX(gameOptions.platformStartSpeed * move);
             platform.displayWidth = platformWidth;
@@ -229,7 +235,6 @@ export default class GameJumpingUpScene extends Phaser.Scene {
     }
 
     update(time, delta) {
-        setInterval(this.updateText, 1000)
         this.scoreText.setText('Score: ' + this.score);
         // game over
         if( this.player.y > this.cameraYMin + this.game.height ) {
@@ -248,21 +253,21 @@ export default class GameJumpingUpScene extends Phaser.Scene {
         // adding new platforms for 1 group
         if(minDistance > this.nextPlatformDistance1){
             this.addPlatform(gameOptions.platformWidth, this.game.config.width + gameOptions.platformWidth / 2,
-                this.game.config.height - 250 , -0.8, this.platformGroup1);
+                this.game.config.height - 230 , -0.8, this.platformGroup1);
         }
 
         minDistance = this.recyclingPlatforms(this.platformGroup2);
         // adding new platforms for 2 group
         if(minDistance > this.nextPlatformDistance2){
             this.addPlatform(gameOptions.platformWidth, this.game.config.width + gameOptions.platformWidth / 2,
-                this.game.config.height - 500 , -0.8, this.platformGroup2);
+                this.game.config.height - 460 , -0.8, this.platformGroup2);
         }
 
         //recycling stars
         minDistance = this.recyclingStars()
         // adding new stars
         if(minDistance > this.nextStarDistance){
-            const myArray = ['70', '270', '470'];
+            const myArray = ['100', '300', '500'];
             const randomValue = myArray[Math.floor(Math.random() * myArray.length)];
             this.addStar(this.game.config.width, this.game.config.height-randomValue, -0.8);
         }
@@ -294,7 +299,11 @@ export default class GameJumpingUpScene extends Phaser.Scene {
         return minDistance;
     }
 
-    updateText(){
-        this.timerText.setText('Time: ' + --this.timer + 's');
+    updateTimer(){
+        this.timer -= 1;
+        this.timerText.setText('Time: ' + this.timer + 's');
+        if (this.timer === 0){
+            this.scene.start("GameOverScene", {score: this.score});
+        }
     }
 };
