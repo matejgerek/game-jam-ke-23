@@ -17,7 +17,7 @@ export default class TitleScene extends Phaser.Scene {
         this.background.depth = -1;
 
         // add start game button with styling
-        const startGameButton = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2,
+        const startGameButton = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2 - 100,
                 'Start Game', {
             fill: '#fff',
             backgroundColor: '#7D58BE',
@@ -35,7 +35,7 @@ export default class TitleScene extends Phaser.Scene {
             .on('pointerdown', () => {this.startButton()});
 
         // add leaderboard button with styling
-        const leaderboardButton = this.add.text(this.game.config.width/2 - 120, this.game.config.height/2 + 100,
+        const leaderboardButton = this.add.text(this.game.config.width/2 - 120, this.game.config.height/2,
                 'Leaderboard', {
             fill: '#fff',
             backgroundColor: '#7D58BE',

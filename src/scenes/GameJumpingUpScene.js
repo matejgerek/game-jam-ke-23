@@ -43,10 +43,29 @@ export default class GameJumpingUpScene extends Phaser.Scene {
     }
 
     create() {
+        // set background
         this.background = this.add.tileSprite(0, 0, 0, 0, 'background').setOrigin(0,0);
         this.background.displayWidth = this.sys.game.config.width;
         this.background.displayHeight = this.sys.game.config.height;
         this.background.depth = -1;
+
+        // add exit button with styling
+        const exitButton = this.add.text(this.game.config.width - 110, 20,
+            'Exit', {
+                fill: '#fff',
+                backgroundColor: '#FF3A44',
+                padding: {
+                    x: 10,
+                    y: 5
+                },
+                borderRadius: 10,
+                fontSize: '32px'
+            });
+        // add functionality to the start game button
+        exitButton.setInteractive({ useHandCursor: true })
+            .on('pointerover', () => exitButton.setStyle({ backgroundColor: '#B20028' }))
+            .on('pointerout', () => exitButton.setStyle({ backgroundColor: '#FF3A44' }))
+            .on('pointerdown', () => {this.exitButton()});
 
         // group 1 with all active platforms.
         this.platformGroup1 = this.add.group({
@@ -171,6 +190,11 @@ export default class GameJumpingUpScene extends Phaser.Scene {
         this.player.anims.play('run');
 
         this.physics.add.collider(this.player, this.starGroup.getChildren(), this.onCollision, null, this);
+    }
+
+    // exit button functionality
+    exitButton() {
+        this.scene.start('TitleScene');
     }
 
     onCollision(player, star) {

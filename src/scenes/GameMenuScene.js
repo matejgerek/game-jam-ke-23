@@ -18,7 +18,7 @@ export default class GameMenuScene extends Phaser.Scene {
 
 
         // add dodge holes button with styling
-        const dodgeHolesButton = this.add.text(this.game.config.width/2 - 115, this.game.config.height/2,
+        const dodgeHolesButton = this.add.text(this.game.config.width/2 - 115, this.game.config.height/2 - 100,
             'Dodge Holes', {
                 fill: '#fff',
                 backgroundColor: '#7D58BE',
@@ -37,7 +37,7 @@ export default class GameMenuScene extends Phaser.Scene {
 
 
         // add jumping up game button with styling
-        const jumpingUpButton = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2 + 100,
+        const jumpingUpButton = this.add.text(this.game.config.width/2 - 105, this.game.config.height/2,
             'Jumping Up', {
                 fill: '#fff',
                 backgroundColor: '#7D58BE',
@@ -53,6 +53,24 @@ export default class GameMenuScene extends Phaser.Scene {
             .on('pointerover', () => jumpingUpButton.setStyle({ backgroundColor: '#BB5BFF' }))
             .on('pointerout', () => jumpingUpButton.setStyle({ backgroundColor: '#7D58BE' }))
             .on('pointerdown', () => {this.game2JumpingUp()});
+
+        // add main menu button with styling
+        const mainMenuButton = this.add.text(this.game.config.width/2 - 100, this.game.config.height/2 + 100,
+            'Main Menu', {
+                fill: '#fff',
+                backgroundColor: '#7D58BE',
+                padding: {
+                    x: 10,
+                    y: 5
+                },
+                borderRadius: 10,
+                fontSize: '32px'
+            });
+        // add functionality to the main menu button
+        mainMenuButton.setInteractive({ useHandCursor: true })
+            .on('pointerover', () => mainMenuButton.setStyle({ backgroundColor: '#BB5BFF' }))
+            .on('pointerout', () => mainMenuButton.setStyle({ backgroundColor: '#7D58BE' }))
+            .on('pointerdown', () => {this.mainMenuButton()});
     }
 
     game1Button() {
@@ -61,5 +79,9 @@ export default class GameMenuScene extends Phaser.Scene {
 
     game2JumpingUp(){
         this.scene.start('GameJumpingUpScene');
+    }
+
+    mainMenuButton(){
+        this.scene.start('TitleScene');
     }
 }
