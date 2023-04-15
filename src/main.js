@@ -3,6 +3,7 @@ import GameJumpingUpScene from './scenes/GameJumpingUpScene.js'
 import LeaderboardScene from "./scenes/LeaderboardScene.js";
 import TitleScene from "./scenes/TitleScene.js";
 import GameOverScene from "./scenes/GameOverScene.js";
+import GameMenuScene from "./scenes/GameMenuScene.js";
 
 // object containing configuration options
 let gameConfig = {
@@ -24,15 +25,17 @@ window.addEventListener("resize", resize, false);
 let gameScene = new GameScene(game);
 const leaderboardScene = new LeaderboardScene();
 const titleScene = new TitleScene();
+const gameMenuScene = new GameMenuScene();
 const gameOverScene = new GameOverScene();
 const gameJumpingUpScene = new GameJumpingUpScene();
 
 // load scenes
-game.scene.add('TitleScene', titleScene)
-game.scene.add('LeaderboardScene', leaderboardScene)
+game.scene.add('TitleScene', titleScene);
+game.scene.add('LeaderboardScene', leaderboardScene);
+game.scene.add('GameMenuScene', gameMenuScene);
 game.scene.add('GameScene', gameScene);
-game.scene.add('GameOverScene', gameOverScene)
-game.scene.add('GameJumpingUpScene', gameJumpingUpScene)
+game.scene.add('GameOverScene', gameOverScene);
+game.scene.add('GameJumpingUpScene', gameJumpingUpScene);
 
 // start title
 game.scene.start('TitleScene');

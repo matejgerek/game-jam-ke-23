@@ -10,8 +10,7 @@ export default class TitleScene extends Phaser.Scene {
     }
 
     async create() {
-        this.background = this.add.image(0, 0, 'background');
-        this.background.setOrigin(0, 0);
+        this.background = this.add.image(0, 0, 'background').setOrigin(0, 0);
         this.background.alpha = 0.3;
         this.background.displayWidth = this.sys.game.config.width;
         this.background.displayHeight = this.sys.game.config.height;
@@ -22,12 +21,7 @@ export default class TitleScene extends Phaser.Scene {
         startText.setInteractive({ useHandCursor: true });
         startText.on('pointerdown', () => this.startButton());
 
-        const jumpingUpGame = this.add.text(this.game.config.width/2 - 175, this.game.config.height/2 + 70,
-            'Game 2 - Jumping Up', { fontSize: '32px', fill: TEXT_COLOR });
-        jumpingUpGame.setInteractive({ useHandCursor: true });
-        jumpingUpGame.on('pointerdown', () => this.game2JumpingUp());
-
-        const leaderboardText = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2 + 140,
+        const leaderboardText = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2 + 100,
             'Leaderboard', { fontSize: '32px', fill: TEXT_COLOR });
         leaderboardText.setInteractive({ useHandCursor: true });
         leaderboardText.on('pointerdown', () => this.leaderboardButton());
@@ -39,12 +33,9 @@ export default class TitleScene extends Phaser.Scene {
     }
 
     startButton() {
-        this.scene.start('GameScene');
+        this.scene.start('GameMenuScene');
     }
 
-    game2JumpingUp(){
-        this.scene.start('GameJumpingUpScene');
-    }
 
     leaderboardButton(){
         this.scene.start('LeaderboardScene');
