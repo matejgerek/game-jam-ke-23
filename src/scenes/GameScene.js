@@ -18,26 +18,17 @@ export default class GameScene extends Phaser.Scene{
     preload(){
         this.load.image("background1", "src/assets/background_new.png");
         this.load.image("platformGrass", "src/assets/platformGrass.png");
-        this.load.image("player1run", "src/assets/run/Run__000.png");
-        this.load.image("player2run", "src/assets/run/Run__001.png");
-        this.load.image("player3run", "src/assets/run/Run__002.png");
-        this.load.image("player4run", "src/assets/run/Run__003.png");
-        this.load.image("player5run", "src/assets/run/Run__004.png");
-        this.load.image("player6run", "src/assets/run/Run__005.png");
-        this.load.image("player7run", "src/assets/run/Run__006.png");
-        this.load.image("player8run", "src/assets/run/Run__007.png");
-        this.load.image("player9run", "src/assets/run/Run__008.png");
-        this.load.image("player10run", "src/assets/run/Run__009.png");
-        this.load.image("player1jump", "src/assets/jump/Jump__000.png");
-        this.load.image("player2jump", "src/assets/jump/Jump__001.png");
-        this.load.image("player3jump", "src/assets/jump/Jump__002.png");
-        this.load.image("player4jump", "src/assets/jump/Jump__003.png");
-        this.load.image("player5jump", "src/assets/jump/Jump__004.png");
-        this.load.image("player6jump", "src/assets/jump/Jump__005.png");
-        this.load.image("player7jump", "src/assets/jump/Jump__006.png");
-        this.load.image("player8jump", "src/assets/jump/Jump__007.png");
-        this.load.image("player9jump", "src/assets/jump/Jump__008.png");
-        this.load.image("player10jump", "src/assets/jump/Jump__009.png");
+        this.load.image("player1run", "src/assets/run/run1n.png");
+        this.load.image("player2run", "src/assets/run/run2n.png");
+        this.load.image("player3run", "src/assets/run/run3n.png");
+        this.load.image("player4run", "src/assets/run/run4n.png");
+        this.load.image("player5run", "src/assets/run/run5n.png");
+        this.load.image("player6run", "src/assets/run/run6n.png");
+        this.load.image("player7run", "src/assets/run/run7n.png");
+        this.load.image("player8run", "src/assets/run/run8n.png");
+        this.load.image("player1jump", "src/assets/jump/jump1.png");
+        this.load.image("player2jump", "src/assets/jump/jump2.png");
+        this.load.image("player3jump", "src/assets/jump/jump3.png");
     }
     create(){
         // setup background
@@ -88,10 +79,10 @@ export default class GameScene extends Phaser.Scene{
                 { key: 'player6run' },
                 { key: 'player7run' },
                 { key: 'player8run' },
-                { key: 'player9run' },
-                { key: 'player10run' }
+                // { key: 'player9run' },
+                // { key: 'player10run' }
             ],
-            frameRate: 10,
+            frameRate: 8,
             repeat: -1
         });
         // Define player animation frames
@@ -101,19 +92,20 @@ export default class GameScene extends Phaser.Scene{
                 { key: 'player1jump' },
                 { key: 'player2jump' },
                 { key: 'player3jump' },
-                { key: 'player4jump' },
-                { key: 'player5jump' },
-                { key: 'player6jump' },
-                { key: 'player7jump' },
-                { key: 'player8jump' },
-                { key: 'player9jump' },
-                { key: 'player10jump' }
+                // { key: 'player4jump' },
+                // { key: 'player5jump' },
+                // { key: 'player6jump' },
+                // { key: 'player7jump' },
+                // { key: 'player8jump' },
+                // { key: 'player9jump' },
+                // { key: 'player10jump' }
             ],
-            frameRate: 10
+            frameRate: 4
         });
 
         // Start player animation
         this.player.anims.play('run');
+        this.player.setScale(1.5, 1.5);
         // checking for input
         this.input.keyboard.on("keydown", this.jump, this);
 
