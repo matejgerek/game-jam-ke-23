@@ -9,13 +9,15 @@ let gameOptions = {
     jumps: 2
 }
 
+const BACKGROUND_SPEED = 1;
+
 export default class GameScene extends Phaser.Scene{
     constructor(game){
         super("GameScene");
         this.game = game;
     }
     preload(){
-        this.load.image("background", "src/assets/background.jpg");
+        this.load.image("background1", "src/assets/background_new.png");
         this.load.image("platform", "src/assets/platform.png");
         this.load.image("player1run", "src/assets/run/Run__000.png");
         this.load.image("player2run", "src/assets/run/Run__001.png");
@@ -40,9 +42,9 @@ export default class GameScene extends Phaser.Scene{
     }
     create(){
         // setup background
-        this.background = this.add.tileSprite(0, 0, 0, 0, 'background').setOrigin(0,0);
-        this.background.displayWidth = this.sys.game.config.width;
-        this.background.displayHeight = this.sys.game.config.height;
+        this.background = this.add.tileSprite(0, -400, this.sys.game.config.width, this.sys.game.config.height + 400,
+            'background1').setOrigin(0,0);
+        this.background.setScale(1.5);
         this.background.depth = -1;
 
         // group with all active platforms.
@@ -158,7 +160,7 @@ export default class GameScene extends Phaser.Scene{
 
     update(){
         // move background
-        this.background.tilePositionX += 4;
+        this.background.tilePositionX += BACKGROUND_SPEED;
         // add score
         this.score += 0.01;
         this.scoreText.setText('Score: ' +  Math.trunc(this.score));
