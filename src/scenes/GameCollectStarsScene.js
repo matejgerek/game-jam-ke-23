@@ -20,7 +20,7 @@ export default class GameCollectStarsScene extends Phaser.Scene {
         this.load.image("background1", "src/assets/background_new.png");
         this.load.image("platformDirt", "src/assets/platformDirt.png");
         this.load.image("platformGrass", "src/assets/platformGrass.png");
-        this.load.image("platformLowest", "src/assets/platformLowest.png");
+        this.load.image("platformLowest", "src/assets/platformLow.png");
         this.load.image("player1run", "src/assets/run/Run__000.png");
         this.load.image("player2run", "src/assets/run/Run__001.png");
         this.load.image("player3run", "src/assets/run/Run__002.png");
@@ -51,6 +51,7 @@ export default class GameCollectStarsScene extends Phaser.Scene {
         this.background.setScale(1.5);
         this.background.depth = -1;
 
+        // cover ground with grass
         this.groundOverlay = this.add.tileSprite(this.game.config.width / 2, this.game.config.height * 1, this.sys.game.config.width, 100,
             'platformGrass');
         this.groundOverlay.depth = 2;
