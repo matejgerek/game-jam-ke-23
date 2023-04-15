@@ -46,13 +46,22 @@ export default class GameMenuScene extends Phaser.Scene {
 
 
         // add jumping up game button with styling
-        const jumpingUpButton = this.add.text(this.game.config.width/2 - 130, this.game.config.height/2,
+        const collectStarsButton = this.add.text(this.game.config.width/2 - 130, this.game.config.height/2,
             'Collect Stars', BUTTON_STYLING);
+        // add functionality to the leaderboard button
+        collectStarsButton.setInteractive({ useHandCursor: true })
+            .on('pointerover', () => collectStarsButton.setStyle({ backgroundColor: '#BB5BFF' }))
+            .on('pointerout', () => collectStarsButton.setStyle({ backgroundColor: '#7D58BE' }))
+            .on('pointerdown', () => {this.game2collectStars()});
+
+        // add jumping up game button with styling
+        const jumpingUpButton = this.add.text(this.game.config.width/2 - 100, this.game.config.height/2 + 100,
+            'Jumping Up', BUTTON_STYLING);
         // add functionality to the leaderboard button
         jumpingUpButton.setInteractive({ useHandCursor: true })
             .on('pointerover', () => jumpingUpButton.setStyle({ backgroundColor: '#BB5BFF' }))
             .on('pointerout', () => jumpingUpButton.setStyle({ backgroundColor: '#7D58BE' }))
-            .on('pointerdown', () => {this.game2JumpingUp()});
+            .on('pointerdown', () => {this.game3jumpingUp()});
 
         // add main menu button with styling
         const mainMenuButton = this.add.text(this.game.config.width/2 - 100, this.game.config.height - 60,
@@ -68,8 +77,12 @@ export default class GameMenuScene extends Phaser.Scene {
         this.scene.start('GameScene');
     }
 
-    game2JumpingUp(){
-        this.scene.start('GameJumpingUpScene');
+    game2collectStars(){
+        this.scene.start('GameCollectStarsScene');
+    }
+
+    game3jumpingUp(){
+        this.scene.start('GameJumpUpScene');
     }
 
     mainMenuButton(){

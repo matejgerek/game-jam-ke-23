@@ -10,9 +10,9 @@ let gameOptions = {
 
 const BACKGROUND_SPEED = 1;
 
-export default class GameJumpingUpScene extends Phaser.Scene {
+export default class GameCollectStarsScene extends Phaser.Scene {
     constructor(game) {
-        super("GameJumpingUpScene");
+        super("GameCollectStarsScene");
         this.game = game;
     }
 
