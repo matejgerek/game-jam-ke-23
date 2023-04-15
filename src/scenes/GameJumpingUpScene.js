@@ -150,7 +150,7 @@ export default class GameJumpingUpScene extends Phaser.Scene {
         this.score = 0;
         this.scoreText = this.add.text(10, 10, 'Score: ' + this.score, {fontSize: '32px', fill: '#fff'});
         //time
-        this.timer = 3;
+        this.timer = 60;
         this.timerText = this.add.text(10, 42, 'Time: ' + this.timer + 's', {fontSize: '32px', fill: '#fff'});
         this.time.addEvent({
             delay: 1000, // in milliseconds
