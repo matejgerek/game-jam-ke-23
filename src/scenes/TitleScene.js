@@ -20,6 +20,7 @@ const BUTTON_STYLING = {
 export default class TitleScene extends Phaser.Scene {
     constructor() {
         super("TitleScene")
+        this.isMusicPlaying = true;
     }
 
     preload() {
@@ -35,9 +36,12 @@ export default class TitleScene extends Phaser.Scene {
         this.background.alpha = 0.6;
         this.background.depth = -1;
 
-        let music = this.sound.add("music", { loop: true });
-        music.play();
-        music.volume = 0.01;
+        if (this.isMusicPlaying) {
+            let music = this.sound.add("music", { loop: true });
+            music.play();
+            music.volume = 0.01;
+            this.isMusicPlaying = false;
+        }
 
         // add start game button with styling
         const startGameButton = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2 - 100,
