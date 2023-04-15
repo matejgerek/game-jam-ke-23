@@ -9,7 +9,7 @@ export default class LeaderboardScene extends Phaser.Scene {
         this.load.image("background1", "src/assets/background_new.png");
     }
 
-    async create() {
+    async create(props) {
         // set background
         this.background = this.add.tileSprite(0, -400, this.sys.game.config.width, this.sys.game.config.height + 400,
             'background1').setOrigin(0,0);
@@ -18,7 +18,7 @@ export default class LeaderboardScene extends Phaser.Scene {
         this.background.depth = -1;
 
          try {
-          const response = await fetch('/scores');
+          const response = await fetch('/scores/'+props.leaderboardPath);
           const data = await response.json();
           this.scores = data;
         } catch (err) {
@@ -26,8 +26,9 @@ export default class LeaderboardScene extends Phaser.Scene {
           this.scores = [];
         }
 
+        const leaderboardTitle = props.leaderboardPath.replace('_', ' ');
 
-        this.add.text(50, 50, 'Leaderboard', { fontSize: '32px', fill: TEXT_COLOR });
+        this.add.text(50, 50, leaderboardTitle + ' leaderboard', { fontSize: '32px', fill: TEXT_COLOR });
         for (let i = 0; i < this.scores.length; i++) {
             const score = this.scores[i];
             const date = new Date(score.date)
@@ -36,12 +37,12 @@ export default class LeaderboardScene extends Phaser.Scene {
             this.add.text(50, 100 + 50 * i, text, { fontSize: '24px', fill: TEXT_COLOR });
         }
 
-        this.add.text(50, 400, 'Press Space to Return to Main Menu', { fontSize: '24px', fill: TEXT_COLOR });
+        this.add.text(50, 400, 'Press Space to go back', { fontSize: '24px', fill: TEXT_COLOR });
     }
 
     update() {
         if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE).isDown) {
-            this.scene.start('TitleScene');
+            this.scene.start('LeaderboardTitleScene');
         }
     }
 }

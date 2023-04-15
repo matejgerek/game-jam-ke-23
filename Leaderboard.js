@@ -1,10 +1,14 @@
 const fs = require('fs');
 
-const PATH = __dirname + '/scores.json';
+const LEADERBOARD_PATHS = {
+    DODGE_HOLES: __dirname + '/dodge-holes.json',
+    COLLECT_STARS: __dirname + '/collect-stars.json',
+}
 
 class Leaderboard {
-  constructor(maxScores = 5) {
+  constructor(path, maxScores = 5) {
     this.maxScores = maxScores;
+    this.path = LEADERBOARD_PATHS[path];
     this.loadScores();
   }
 
@@ -28,12 +32,12 @@ class Leaderboard {
 
   loadScores() {
       try {
-        const data = fs.readFileSync(PATH);
+        const data = fs.readFileSync(this.path);
         this.scores = JSON.parse(data);
       } catch (err) {
         if (err.code === 'ENOENT') {
           // Create new file if it does not exist
-          fs.writeFileSync(this.filePath, '[]');
+          fs.writeFileSync(this.path, '[]');
           this.scores = [];
         } else {
           throw err;
@@ -43,8 +47,8 @@ class Leaderboard {
 
 
   saveScores() {
-    fs.writeFileSync(PATH, JSON.stringify(this.scores));
+    fs.writeFileSync(this.path, JSON.stringify(this.scores));
   }
 }
 
-module.exports = Leaderboard;
+module.exports = Leaderboard

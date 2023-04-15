@@ -1,4 +1,3 @@
-// global game options
 let gameOptions = {
     platformStartSpeed: 350,
     spawnRange: [300, 100],
@@ -151,7 +150,7 @@ export default class GameJumpingUpScene extends Phaser.Scene {
         this.score = 0;
         this.scoreText = this.add.text(10, 10, 'Score: ' + this.score, {fontSize: '32px', fill: '#fff'});
         //time
-        this.timer = 60;
+        this.timer = 3;
         this.timerText = this.add.text(10, 42, 'Time: ' + this.timer + 's', {fontSize: '32px', fill: '#fff'});
         this.time.addEvent({
             delay: 1000, // in milliseconds
@@ -275,7 +274,7 @@ export default class GameJumpingUpScene extends Phaser.Scene {
         this.scoreText.setText('Score: ' + this.score);
         // game over
         if( this.player.y > this.cameraYMin + this.game.height ) {
-            this.scene.start("GameOverScene", {score: this.score});
+            this.scene.start("GameOverScene", {score: this.score, leaderboardPath: 'DODGE_HOLES'});
         }
         this.player.x = this.game.config.width / 2;
 
@@ -340,7 +339,7 @@ export default class GameJumpingUpScene extends Phaser.Scene {
         this.timer -= 1;
         this.timerText.setText('Time: ' + this.timer + 's');
         if (this.timer === 0){
-            this.scene.start("GameOverScene", {score: this.score});
+            this.scene.start("GameOverScene", {score: this.score, leaderboardPath: "COLLECT_STARS"});
         }
     }
 };

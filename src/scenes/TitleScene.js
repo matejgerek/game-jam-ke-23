@@ -66,6 +66,6 @@ export default class TitleScene extends Phaser.Scene {
 
 
     leaderboardButton(){
-        this.scene.start('LeaderboardScene');
+        this.scene.start('LeaderboardTitleScene');
     }
 }

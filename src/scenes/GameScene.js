@@ -1,4 +1,3 @@
-// global game options
 let gameOptions = {
     platformStartSpeed: 350,
     spawnRange: [100, 350],
@@ -166,7 +165,7 @@ export default class GameScene extends Phaser.Scene{
         this.scoreText.setText('Score: ' +  Math.trunc(this.score));
         // game over
         if(this.player.y > this.game.config.height){
-            this.scene.start("GameOverScene", {score: this.score});
+            this.scene.start("GameOverScene", {score: this.score, leaderboardPath: 'DODGE_HOLES'});
         }
         this.player.x = gameOptions.playerStartPosition;
 

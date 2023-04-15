@@ -21,7 +21,7 @@ export default class GameOverScene extends Phaser.Scene {
         const score = Math.floor(data.score);
 
         const username = localStorage.getItem('phaser_username');
-        await fetch(`/add-score/${score}/${username ? username : 'noname'}`)
+        await fetch(`/add-score/${data.leaderboardPath}/${score}/${username ? username : 'noname'}`)
         const centerX = this.cameras.main.width / 2;
         this.add.image(centerX, 200, 'game_over').setOrigin(0.5, 0);
 
