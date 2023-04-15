@@ -6,15 +6,14 @@ export default class LeaderboardScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', 'src/assets/background.jpg');
+        this.load.image("background1", "src/assets/background_new.png");
     }
 
     async create() {
-        this.background = this.add.image(0, 0, 'background');
-        this.background.setOrigin(0, 0);
-        this.background.alpha = 0.3;
-        this.background.displayWidth = this.sys.game.config.width;
-        this.background.displayHeight = this.sys.game.config.height;
+        // set background
+        this.background = this.add.tileSprite(0, -400, this.sys.game.config.width, this.sys.game.config.height + 400,
+            'background1').setOrigin(0,0);
+        this.background.setScale(1.5);
         this.background.depth = -1;
 
          try {
