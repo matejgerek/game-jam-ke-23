@@ -3,6 +3,7 @@ const fs = require('fs');
 const LEADERBOARD_PATHS = {
     DODGE_HOLES: __dirname + '/dodge-holes.json',
     COLLECT_STARS: __dirname + '/collect-stars.json',
+    JUMP_UP: __dirname + '/jump-up.json',
 }
 
 class Leaderboard {

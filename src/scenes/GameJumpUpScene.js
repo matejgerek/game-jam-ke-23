@@ -147,7 +147,6 @@ export default class GameJumpUpScene extends Phaser.Scene {
             } else if (this.score !== 0) {
                 gameOptions.platform2height += 320
             }
-            console.log(gameOptions.platform1height)
             platform.active = false
         }
     }
@@ -189,13 +188,13 @@ export default class GameJumpUpScene extends Phaser.Scene {
 
     update(time, delta) {
         if (this.player.y > this.game.config.height-100 && this.score > 1) {
-            this.scene.start("GameOverScene", {score: this.score});
+            this.scene.start("GameOverScene", {score: this.score, leaderboardPath: 'JUMP_UP'});
         }
         this.scoreText.setText('Score: ' + this.score);
         this.scoreText.y = this.player.y - 200
         // game over
         if( this.player.y > this.cameraYMin + this.game.height ) {
-            this.scene.start("GameOverScene", {score: this.score});
+            this.scene.start("GameOverScene", {score: this.score, leaderboardPath: 'JUMP_UP'});
         }
         this.player.x = this.game.config.width / 2;
 

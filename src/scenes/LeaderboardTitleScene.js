@@ -55,9 +55,18 @@ export default class LeaderboardTitleScene extends Phaser.Scene {
                 this.leaderboardButton('COLLECT_STARS')
             })
 
+        const jumpUpLeaderboard = this.add.text(this.game.config.width / 2 - 190, this.game.config.height / 2 + 150,
+            'Jump up leaderboard', BUTTON_STYLING);
+            jumpUpLeaderboard.setInteractive({useHandCursor: true})
+            .on('pointerover', () => jumpUpLeaderboard.setStyle({backgroundColor: '#BB5BFF'}))
+            .on('pointerout', () => jumpUpLeaderboard.setStyle({backgroundColor: '#7D58BE'}))
+            .on('pointerdown', () => {
+                this.leaderboardButton('JUMP_UP')
+            })
+
         const returnText = this.add.text(this.game.config.width / 2, 100, 'Press Space to Return to Main Menu', { fontSize: '24px', fill: 'white' });
         returnText.setOrigin(0.5, 0);
-        returnText.y = this.cameras.main.height / 2 + 200;
+        returnText.y = this.cameras.main.height / 2 + 250;
     }
 
     leaderboardButton(leaderboardPath){
