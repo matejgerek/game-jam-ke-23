@@ -31,6 +31,7 @@ export default class GameMenuScene extends Phaser.Scene {
         this.background = this.add.tileSprite(0, -400, this.sys.game.config.width, this.sys.game.config.height + 400,
             'background1').setOrigin(0,0);
         this.background.setScale(1.5);
+        this.background.alpha = 0.6;
         this.background.depth = -1;
 
 
