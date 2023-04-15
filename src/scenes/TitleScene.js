@@ -1,4 +1,21 @@
-const TEXT_COLOR = '#ffffff';
+const BUTTON_STYLING = {
+    fill: '#fff',
+    backgroundColor: '#7D58BE',
+    padding: {
+        x: 10,
+        y: 5
+    },
+    borderRadius: 10,
+    fontSize: '32px',
+    shadow: {
+        offsetX: 1,
+        offsetY: 1,
+        color: '#000000',
+        blur: 2,
+        stroke: true,
+        fill: true
+    }
+};
 
 export default class TitleScene extends Phaser.Scene {
     constructor() {
@@ -18,16 +35,7 @@ export default class TitleScene extends Phaser.Scene {
 
         // add start game button with styling
         const startGameButton = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2 - 100,
-                'Start Game', {
-            fill: '#fff',
-            backgroundColor: '#7D58BE',
-            padding: {
-                x: 10,
-                y: 5
-            },
-            borderRadius: 10,
-            fontSize: '32px'
-        });
+                'Start Game', BUTTON_STYLING);
         // add functionality to the start game button
         startGameButton.setInteractive({ useHandCursor: true })
             .on('pointerover', () => startGameButton.setStyle({ backgroundColor: '#BB5BFF' }))
@@ -36,16 +44,7 @@ export default class TitleScene extends Phaser.Scene {
 
         // add leaderboard button with styling
         const leaderboardButton = this.add.text(this.game.config.width/2 - 120, this.game.config.height/2,
-                'Leaderboard', {
-            fill: '#fff',
-            backgroundColor: '#7D58BE',
-            padding: {
-                x: 10,
-                y: 5
-            },
-            borderRadius: 10,
-            fontSize: '32px'
-        });
+                'Leaderboard', BUTTON_STYLING);
         // add functionality to the leaderboard button
         leaderboardButton.setInteractive({ useHandCursor: true })
             .on('pointerover', () => leaderboardButton.setStyle({ backgroundColor: '#BB5BFF' }))

@@ -59,7 +59,15 @@ export default class GameJumpingUpScene extends Phaser.Scene {
                     y: 5
                 },
                 borderRadius: 10,
-                fontSize: '32px'
+                fontSize: '32px',
+                shadow: {
+                    offsetX: 1,
+                    offsetY: 1,
+                    color: '#000000',
+                    blur: 2,
+                    stroke: true,
+                    fill: true
+                }
             });
         // add functionality to the start game button
         exitButton.setInteractive({ useHandCursor: true })
