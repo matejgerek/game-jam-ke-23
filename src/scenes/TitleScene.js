@@ -24,6 +24,7 @@ export default class TitleScene extends Phaser.Scene {
 
     preload() {
         this.load.image("background1", "src/assets/background_new.png");
+        this.load.audio("music", ["src/music/POL-hitch-a-ride-short.wav"]);
     }
 
     async create() {
@@ -33,6 +34,10 @@ export default class TitleScene extends Phaser.Scene {
         this.background.setScale(1.5);
         this.background.alpha = 0.6;
         this.background.depth = -1;
+
+        let music = this.sound.add("music", { loop: true });
+        music.play();
+        music.volume = 0.01;
 
         // add start game button with styling
         const startGameButton = this.add.text(this.game.config.width/2 - 110, this.game.config.height/2 - 100,
