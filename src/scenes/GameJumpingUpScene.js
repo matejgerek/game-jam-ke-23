@@ -43,7 +43,7 @@ export default class GameJumpingUpScene extends Phaser.Scene {
     }
 
     create() {
-        this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
+        this.background = this.add.tileSprite(0, 0, 0, 0, 'background').setOrigin(0,0);
         this.background.displayWidth = this.sys.game.config.width;
         this.background.displayHeight = this.sys.game.config.height;
         this.background.depth = -1;
@@ -235,6 +235,9 @@ export default class GameJumpingUpScene extends Phaser.Scene {
     }
 
     update(time, delta) {
+        // move background
+        this.background.tilePositionX += 4;
+        // add score text
         this.scoreText.setText('Score: ' + this.score);
         // game over
         if( this.player.y > this.cameraYMin + this.game.height ) {

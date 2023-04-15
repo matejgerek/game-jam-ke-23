@@ -7,14 +7,10 @@ body {
   overflow:hidden;
 }
 
-body>canvas {
+canvas {
   width:100%!important;
   height:100%!important;
   position:fixed;
   top:0;
   left:0;
-}
-
-canvas {
-  /* add any additional styling for your canvas element here */
 }

@@ -40,9 +40,7 @@ export default class GameScene extends Phaser.Scene{
     }
     create(){
         // setup background
-        this.background = this.add.tileSprite(0, 0, 0, 0, 'background');
-        this.background.tilePositionX = -100;
-        this.background.setOrigin(0, 0);
+        this.background = this.add.tileSprite(0, 0, 0, 0, 'background').setOrigin(0,0);
         this.background.displayWidth = this.sys.game.config.width;
         this.background.displayHeight = this.sys.game.config.height;
         this.background.depth = -1;
