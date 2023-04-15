@@ -45,8 +45,8 @@ export default class GameMenuScene extends Phaser.Scene {
 
 
         // add jumping up game button with styling
-        const jumpingUpButton = this.add.text(this.game.config.width/2 - 105, this.game.config.height/2,
-            'Jumping Up', BUTTON_STYLING);
+        const jumpingUpButton = this.add.text(this.game.config.width/2 - 130, this.game.config.height/2,
+            'Collect Stars', BUTTON_STYLING);
         // add functionality to the leaderboard button
         jumpingUpButton.setInteractive({ useHandCursor: true })
             .on('pointerover', () => jumpingUpButton.setStyle({ backgroundColor: '#BB5BFF' }))
@@ -54,7 +54,7 @@ export default class GameMenuScene extends Phaser.Scene {
             .on('pointerdown', () => {this.game2JumpingUp()});
 
         // add main menu button with styling
-        const mainMenuButton = this.add.text(this.game.config.width/2 - 100, this.game.config.height/2 + 100,
+        const mainMenuButton = this.add.text(this.game.config.width/2 - 100, this.game.config.height - 60,
             'Main Menu', BUTTON_STYLING);
         // add functionality to the main menu button
         mainMenuButton.setInteractive({ useHandCursor: true })
