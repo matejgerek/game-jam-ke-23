@@ -1,4 +1,5 @@
 import GameScene from './scenes/GameScene.js'
+import GameJumpingUpScene from './scenes/GameJumpingUpScene.js'
 import LeaderboardScene from "./scenes/LeaderboardScene.js";
 import TitleScene from "./scenes/TitleScene.js";
 import GameOverScene from "./scenes/GameOverScene.js";
@@ -8,7 +9,7 @@ let gameConfig = {
     type: Phaser.AUTO,
     width: 1334,
     height: 750,
-    backgroundColor: 0x444444,
+    backgroundColor: '0x444444',
 
     // physics settings
     physics: {
@@ -24,12 +25,14 @@ let gameScene = new GameScene(game);
 const leaderboardScene = new LeaderboardScene();
 const titleScene = new TitleScene();
 const gameOverScene = new GameOverScene();
+const gameJumpingUpScene = new GameJumpingUpScene();
 
 // load scenes
 game.scene.add('TitleScene', titleScene)
 game.scene.add('LeaderboardScene', leaderboardScene)
 game.scene.add('GameScene', gameScene);
 game.scene.add('GameOverScene', gameOverScene)
+game.scene.add('GameJumpingUpScene', gameJumpingUpScene)
 
 // start title
 game.scene.start('TitleScene');
