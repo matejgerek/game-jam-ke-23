@@ -22,7 +22,7 @@ export default class GameJumpUpScene extends Phaser.Scene {
         this.load.image("platformGrass", "src/assets/platformGrass.png");
         this.load.image("platformLowest", "src/assets/platformLow.png");
         this.load.image("player", "src/assets/run/run1n.png");
-        this.load.image("player1run", "src/assets/run/run1n.png");
+        this.load.image("player1run", "src/assets/playerForward.png");
         this.load.image("player2run", "src/assets/run/run2n.png");
         this.load.image("player3run", "src/assets/run/run3n.png");
         this.load.image("player4run", "src/assets/run/run4n.png");
@@ -153,15 +153,8 @@ export default class GameJumpUpScene extends Phaser.Scene {
             key: 'run',
             frames: [
                 { key: 'player1run' },
-                { key: 'player2run' },
-                { key: 'player3run' },
-                { key: 'player4run' },
-                { key: 'player5run' },
-                { key: 'player6run' },
-                { key: 'player7run' },
-                { key: 'player8run' },
             ],
-            frameRate: 8,
+            frameRate: 1,
             repeat: -1
         });
         // Define player animation frames
